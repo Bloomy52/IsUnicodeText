@@ -37,17 +37,30 @@ winget install Git.Git --silent
 ```
 Then, make sure you have the `.NET desktop build tools` for Visual Studio 2026. You can download them here https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2026. `IsUnicodeText` targets v4.7.2 of the .NET Framework.
 
+We also have a new way to verify that you have everything you need to `IsUnicodeText` from source you can use `devcheck`.
+`devcheck` is a small Ruby Gem that you can use to verify that you have everything you need to build a package from source exactly as the maintainer intended.
+Make sure you have Ruby installed and then run the following command to install `devcheck`:
+```bash
+gem install devcheck
+```
+You can find out more information in the `devcheck` repository [here](https://github.com/Bloomy52/devcheck).
+
+
 1. Clone the repo
 ```bash
 git clone https://github.com/Bloomy52/IsUnicodeText.git
 ```
 2. Search for "Developer Command Prompt for VS" and press Enter.
 3. `cd` to the directory where you cloned the repo.
-4. Then run the following command:
+4. Then run `devcheck` to make sure you have prepared your environment. You need to run this from the "Developer Command Prompt for VS" otherwise this will fail.
+```bat
+devcheck vb
+```
+5. Once all the checks have passed, run the following command to build `IsUnicodeText`:
 ```bat
 msbuild IsUnicodeText/IsUnicodeText.vbproj /restore /m /p:Configuration=Release /p:Platform=AnyCPU
 ```
-5. Then you can navigate to the `\bin\Release` directory and double click on the app there via File Explorer or you can invoke it in the terminal like so:
+6. Then you can navigate to the `\bin\Release` directory and double click on the app there via File Explorer or you can invoke it in the terminal like so:
 ```bat
 IsUnicodeText\bin\Release\IsUnicodeText.exe 
 ```
@@ -82,7 +95,11 @@ git clone https://github.com/Bloomy52/IsUnicodeText.git
 ```
 2. Search for "Developer Command Prompt for VS" and press Enter.
 3. `cd` to the directory where you cloned the repo.
-4. Then use the following command to compile the C file.
+4. Run `devcheck` to make sure you have setup your environment correctly.
+```bat
+devcheck c
+```
+5. Once all the checks pass, use the following command to compile the C file.
 ```bat
 cl /W4 test_unicode.c /link Advapi32.lib
 ```
