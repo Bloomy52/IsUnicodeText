@@ -9,7 +9,7 @@ Well, `IS_TEXT_UNICODE_STATISTICS` used a trick where it split hex values into a
 
 This faithful recreation takes an ASCII input, converts it to bytes, and then implements the separation of the bytes into high-byte streams and low-byte streams. The function finds the absolute value of the changes from the previous byte and the current byte, sums them together and then decides whether the text is `Unicode` or `ANSI` based on whether the total changes of the low bytes is greater than the total changes of the high bytes times three. For those who like to visualize it in math notation, here it is below.
 
-1. Find the absolute value of the changes: $|\text{bytes}_{\text{previous}} - \text{bytes}_{\text{current}}| = \Delta_i$
+1. Find the absolute value of the changes: $`|\text{bytes}_{\text{previous}} - \text{bytes}_{\text{current}}| = \Delta_i`$
 2. Sum the total changes for the byte stream: $\Delta_1 + \Delta_2 + ... + \Delta_n$
 3. Compare the summed changes for each stream and decide whether the text is `Unicode` or `ANSI`:\
 Unicode Encoded if: $\sum_{i=1}^n \Delta_{i_{\text{ low-bytes}}} \gt \left(\sum_{i=1}^n \Delta_{i_{\text{ high-bytes}}} \right) * 3$\
@@ -60,7 +60,11 @@ devcheck vb
 ```bat
 msbuild IsUnicodeText/IsUnicodeText.vbproj /restore /m /p:Configuration=Release /p:Platform=AnyCPU
 ```
+<<<<<<< HEAD
 6. Then you can navigate to the `\bin\Release` directory and double click on the app there via File Explorer or you can invoke it in the terminal like so:
+=======
+5. Then you can navigate to the `\bin\Release` directory and double click on the app there via File Explorer or you can invoke it in the Command Prompt like so:
+>>>>>>> 22ff7d8bd4d037c6590f7ae4f8ddca67c979c534
 ```bat
 IsUnicodeText\bin\Release\IsUnicodeText.exe 
 ```
@@ -70,7 +74,7 @@ IsUnicodeText\bin\Release\IsUnicodeText.exe
 If you didn't notice, there is a C file named `test_unicode.c` in the repo. You can test the actual `IsTextUnicode` function found in the Win32 API. To do this, you can do it one of two ways.
 
 ### 1. Downloading the Executable from GitHub Releases
-You can download the EXE from the latest [GitHub Release](https://github.com/Bloomy52/IsUnicodeText/releases/latest). To test it out, please use the following command from the directory where the file was downloaded in the Command Prompt (cmd.exe):
+You can download the EXE from the latest [GitHub Release](https://github.com/Bloomy52/IsUnicodeText/releases/latest). To test it out, please use the following command from the directory where the file was downloaded in the Command Prompt:
 ```bat
 test_unicode.exe "bush hid the facts"
 :: you can enter any phrase you want as long as it is in quotes
@@ -103,7 +107,7 @@ devcheck c
 ```bat
 cl /W4 test_unicode.c /link Advapi32.lib
 ```
-5. Then you can invoke it in the terminal like so:
+5. Then you can invoke it in the Command Prompt like so:
 ```bat
 test_unicode.exe "bush hid the facts"
 :: you can enter any phrase you want as long as it is in quotes
