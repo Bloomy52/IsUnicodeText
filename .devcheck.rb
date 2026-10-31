@@ -6,11 +6,20 @@
 name "IsUnicodeText?"
 id "isunicodetext"
 
-command "msbuild"
+environment "vb" do
+  command "msbuild"
+  file "IsUnicodeText.slnx"
+  file "IsUnicodeText\\IsUnicodeText.vbproj"
+  file "IsUnicodeText\\Form1.vb"
+  file "IsUnicodeText\\Form1.Designer.vb"
+  file "IsUnicodeText\\App.config"
+end
+
+environment "c" do
+    command "cl"
+    file "test_unicode.c"
+end
+
 command "git"
 
-file "IsUnicodeText.slnx"
-file "IsUnicodeText\\IsUnicodeText.vbproj"
-file "IsUnicodeText\\Form1.vb"
-file "IsUnicodeText\\Form1.Designer.vb"
-file "IsUnicodeText\\App.config"
+
